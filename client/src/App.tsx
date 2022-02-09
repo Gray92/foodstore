@@ -1,8 +1,17 @@
-import React from 'react';
+import Layout, { Content } from 'antd/lib/layout/layout';
+import React, {FC} from 'react';
+import AppRouter from './components/AppRouter';
+import Navbar from './components/Navbar';
+import './App.css';
 
-function App() {
+const App: FC = () => {
   return (
-    <div>Еда</div>
+    <Layout>
+		<Navbar />
+		<Content>
+			<AppRouter />
+		</Content>
+    </Layout>
   );
 }
 
