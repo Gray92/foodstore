@@ -3,13 +3,13 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import Basket from '../pages/Basket';
 import Login from '../pages/Login';
 import Shop from '../pages/Shop';
-
+import { useTypedSelector } from '../hooks/useTypedSelector';
 
 const AppRouter: FC = () => {
-	const auth = true
+	const { isAuth } = useTypedSelector(state => state.auth)
 
 	return (
-		auth
+		isAuth
 			?
 			<Routes>
 				<Route path="/shop" element={<Shop />} />
