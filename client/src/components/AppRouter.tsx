@@ -1,12 +1,18 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Basket from '../pages/Basket';
-import Login from '../pages/Login';
 import Shop from '../pages/Shop';
 import { useTypedSelector } from '../hooks/useTypedSelector';
+import Login from '../pages/Login';
+import Registration from '../pages/Registration';
+import { AuthActionCreators } from '../store/reducers/auth/action-creators';
 
 const AppRouter: FC = () => {
 	const { isAuth } = useTypedSelector(state => state.auth)
+
+	useEffect(()=>{
+		AuthActionCreators.auth()
+	},[])
 
 	return (
 		isAuth
@@ -19,6 +25,7 @@ const AppRouter: FC = () => {
 			:
 			<Routes>
 				<Route path="/login" element={<Login />} />
+				<Route path="/registration" element={<Registration />} />
 				<Route path="*" element={<Navigate to="/login" replace />} />
 			</Routes>
 

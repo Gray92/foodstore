@@ -1,23 +1,25 @@
-import { Row, Button, Form, Input} from 'antd';
+import { Row, Button, Form, Input } from 'antd';
 import React, { FC, useState } from 'react'
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { AuthActionCreators } from '../store/reducers/auth/action-creators';
 import { rules } from '../utils/rules';
+import { AuthActionCreators } from '../store/reducers/auth/action-creators';
+import { useDispatch } from 'react-redux';
 
 
-const Login: FC = () => {
+const Registration: FC = () => {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const dispatch = useDispatch()
 
 	const navigate = useNavigate()
-	const goRegistration = () => navigate('/registration')
+	const goLogin = () => navigate('/login')
+
 
 	const clickButtonHandler = (e:React.MouseEvent<HTMLElement>) => {
 		e.preventDefault()
-		dispatch(AuthActionCreators.login(email, password))
+		dispatch(AuthActionCreators.registration(email, password))
 	}
+
 
 	return (
 		<div>
@@ -28,7 +30,7 @@ const Login: FC = () => {
 						name="email"
 						rules={[rules.required('Пожалуйста, введите ваш Email')]}
 					>
-						<Input value={email} onChange={(e) => {setEmail(e.target.value) }} />
+						<Input value={email} onChange={(e) => {setEmail(e.target.value)}} />
 					</Form.Item>
 
 					<Form.Item
@@ -40,11 +42,11 @@ const Login: FC = () => {
 					</Form.Item>
 
 					<Form.Item >
-						<Button type="primary" htmlType="submit" onClick={(e) => clickButtonHandler(e)}>
-							Войти
+						<Button type="primary" htmlType="submit" onClick={(e) => clickButtonHandler(e) }>
+							Создать
 						</Button>
-						<Button type="link" htmlType="button" onClick={() => goRegistration()} >
-							Зарегистрироваться
+						<Button type="link" htmlType="button" onClick={() => goLogin()}  >
+							Войти
 						</Button>
 					</Form.Item>
 				</Form>
@@ -54,4 +56,4 @@ const Login: FC = () => {
 	)
 }
 
-export default Login;
+export default Registration;

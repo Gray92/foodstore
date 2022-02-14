@@ -19,7 +19,7 @@ router.post('/registration',
 			if (!errors.isEmpty()) {
 				return res.status(400).json({ message: "Произошла ошибка при регистрации", errors })
 			}
-
+			
 			const { email, password } = req.body
 
 			const candidate = await User.findOne({ email })

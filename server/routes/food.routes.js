@@ -56,7 +56,7 @@ router.get('/',
 
 router.get('/:id', async (req, res) => {
 	try {
-		const { id } = req.body
+		const { id } = req.query
 
 		const food = await Food.find({ id })
 
@@ -73,7 +73,8 @@ router.get('/:id', async (req, res) => {
 router.put('/:id',
 	async (req, res) => {
 		try {
-			const { id, name, type, desqription, price } = req.body
+			const { id } = req.query
+			const { name, type, desqription, price } = req.body
 			const { img } = req.files
 
 			await Food.updateOne(
@@ -102,7 +103,7 @@ router.put('/:id',
 router.delete('/:id',
 	async (req, res) => {
 		try {
-			const { id } = req.body
+			const { id } = req.query
 
 			await Food.deleteOne({ _id: id })
 
