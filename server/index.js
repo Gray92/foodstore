@@ -6,7 +6,7 @@ const foodRouter = require("./routes/food.routes")
 const basketRouter = require("./routes/basket.routes")
 const corsMiddleware = require('./middleware/cors.middleware')
 const fileUpload = require("express-fileupload")
-const path = require('path')
+
 
 const app = express()
 
@@ -14,7 +14,7 @@ const PORT = config.get('serverPort')
 
 app.use(corsMiddleware)
 app.use(express.json())
-app.use(express.static(path.resolve(__dirname, 'static')))
+app.use(express.static('static'))
 app.use(fileUpload({}))
 app.use('/api/auth', authRouter)
 app.use('/api/food', foodRouter)

@@ -42,9 +42,9 @@ export const AuthActionCreators = {
 	logout: () => async (dispatch: AppDispatch) => {
 		try {
 			dispatch(AuthActionCreators.setIsLoading(true));
+			dispatch(AuthActionCreators.setIsAuth(false))
 			dispatch(AuthActionCreators.setUser({} as IUser))
 			localStorage.removeItem('token')
-			dispatch(AuthActionCreators.setIsAuth(false))
 			dispatch(AuthActionCreators.setIsLoading(false));
 		} catch (e: any) {
 			dispatch(AuthActionCreators.setError(e.response.data.message))
@@ -53,15 +53,19 @@ export const AuthActionCreators = {
 
 	auth: () => async (dispatch: AppDispatch) => {
 		try {
+			dispatch(AuthActionCreators.setIsLoading(true));
 			const response = await axios.get('http://localhost:8080/api/auth/auth',
-				{ headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
+				{ headers: { Authorization: `Bearer ${localStorage.token}` } }
 			)
 			dispatch(AuthActionCreators.setUser(response.data.user))
+			dispatch(AuthActionCreators.setIsAuth(true))
 			localStorage.setItem('token', response.data.token)
+			dispatch(AuthActionCreators.setIsLoading(false));
 		} catch (e: any) {
 			dispatch(AuthActionCreators.setError(e.response.data.message))
-			localStorage.removeItem('token')
+			localStorage.removeItem('token');
 		}
-
 	}
+
+	
 }

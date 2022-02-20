@@ -1,5 +1,7 @@
 import auth from "./auth";
+import food from "./food";
 
 export default {
-	auth: auth
+	auth: auth,
+	food: food
 }

@@ -1,7 +1,9 @@
 const Router = require("express")
 const Food = require("../models/Food")
 const uuid = require('uuid')
-const path = require('path')
+
+const config = require('config')
+const User = require("../models/User")
 const router = new Router()
 
 router.post('/',
@@ -16,7 +18,7 @@ router.post('/',
 			}
 
 			let fileName = uuid.v4() + ".jpg"
-			img.mv(path.resolve(__dirname, '..', 'static', fileName))
+			img.mv(config.get("staticPath") + "\\" + fileName)
 
 			const food = new Food({ name, type, desqription, price, img: fileName })
 
@@ -42,7 +44,7 @@ router.get('/',
 			!type ? type = {} : type = { type }
 
 			Food.paginate(type, { page, limit })
-				.then(food => {
+			.then(food => {
 					res.json(food.docs)
 				})
 
@@ -54,23 +56,7 @@ router.get('/',
 )
 
 
-router.get('/:id', async (req, res) => {
-	try {
-		const { id } = req.query
-
-		const food = await Food.find({ id })
-
-		return res.json(food)
-	} catch (e) {
-		console.log(e)
-		res.send({ message: "Не удалось загрузить продукт с сервера" })
-	}
-
-
-})
-
-
-router.put('/:id',
+router.put('/',
 	async (req, res) => {
 		try {
 			const { id } = req.query
@@ -78,7 +64,7 @@ router.put('/:id',
 			const { img } = req.files
 
 			await Food.updateOne(
-				{ _id: id },
+				{ _id: id},
 				{
 					$set: {
 						name: name,
@@ -89,6 +75,7 @@ router.put('/:id',
 					}
 				}
 			)
+
 			
 
 			return res.json({ message: 'Продукт успешно изменен.' })
@@ -100,12 +87,16 @@ router.put('/:id',
 )
 
 
-router.delete('/:id',
+router.delete('/',
 	async (req, res) => {
 		try {
 			const { id } = req.query
 
-			await Food.deleteOne({ _id: id })
+			const food = await Food.find({ _id: id })
+			fs.unlinkSync(config.get("staticPath") + "\\" + food.img)
+			await Food.findOneAndDelete({ _id: id })
+			
+			await User.save()
 
 			return res.json({ message: 'Продукт успешно удален.' })
 		} catch (e) {

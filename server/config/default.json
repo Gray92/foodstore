@@ -1,5 +1,6 @@
 {
 	"serverPort": "8080",
 	"dbUrl": "mongodb+srv://Grachev2021:gray92ya@foodstore.fam03.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
-	"secretKey": "food-store-secret-key"
+	"secretKey": "food-store-secret-key",
+	"staticPath": "D:\\portfolio_project\\foodstore\\server\\static"
 }

@@ -3,12 +3,12 @@ const Food = require("../models/Food")
 const User = require("../models/User")
 const router = new Router()
 
-router.post('/:id',
+router.post('/',
 	async (req, res) => {
 		try {
-			const { userId } = req.query
-			const user = await User.findOne({ userId })
-			const food = await Food.findOne({ id: req.body.id })
+			const { userId, id } = req.body
+			const user = await User.findOne({ _id: userId })
+			const food = await Food.findOne({ _id: id })
 
 			const basket = user.basket.push(food)
 
@@ -32,25 +32,20 @@ router.post('/:id',
 	}
 )
 
-router.delete('/:id',
+router.put('/',
 	async (req, res) => {
 		try {
-			const { userId } = req.query
-			const user = await User.findOne({ userId })
-			const food = await Food.findOne({ id: req.body.id })
-
-			const basket = user.basket.filter(f => f !== food)
-
-			await user.updateOne(
-				{ _id: userId },
+			const { userId, id } = req.body
+			const food = await Food.findOne({ _id: id })
+			const user = await User.updateOne({ _id: userId },
 				{
-					$set: {
-						basket: basket,
+					$pull:{
+						basket: food
 					}
 				}
 			)
 
-			await user.save()
+			//await user.save()
 
 			res.send(user)
 
