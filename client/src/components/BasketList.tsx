@@ -1,5 +1,4 @@
-import { Button, Card, Row } from "antd";
-import React, { FC, useEffect, useRef, useState } from "react";
+import React, { FC, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { BasketAction } from "../actions";
 import { useTypedSelector } from "../hooks/useTypedSelector";

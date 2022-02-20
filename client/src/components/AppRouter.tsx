@@ -5,7 +5,6 @@ import Shop from '../pages/Shop';
 import { useTypedSelector } from '../hooks/useTypedSelector';
 import Login from '../pages/Login';
 import Registration from '../pages/Registration';
-import Spiner from './Spin';
 
 const AppRouter: FC = () => {
 	const { isAuth } = useTypedSelector(state => state.auth)

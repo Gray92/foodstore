@@ -3,7 +3,7 @@ const Food = require("../models/Food")
 const uuid = require('uuid')
 
 const config = require('config')
-const User = require("../models/User")
+
 const router = new Router()
 
 router.post('/',
@@ -93,10 +93,10 @@ router.delete('/',
 			const { id } = req.query
 
 			const food = await Food.find({ _id: id })
-			fs.unlinkSync(config.get("staticPath") + "\\" + food.img)
+			
 			await Food.findOneAndDelete({ _id: id })
 			
-			await User.save()
+			
 
 			return res.json({ message: 'Продукт успешно удален.' })
 		} catch (e) {

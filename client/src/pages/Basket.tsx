@@ -10,10 +10,12 @@ const Basket: FC = () => {
 	return (
 		<Layout>
 			<Row justify='center' align='middle' className='h100'>
-				<Content className='content'>
+				<Content className='basket-card-wrapper'>
+
 					<BasketHeader />
 					<BasketList />
 					<BasketCost />
+
 				</Content>
 			</Row>
 		</Layout>

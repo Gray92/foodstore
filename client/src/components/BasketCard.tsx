@@ -1,5 +1,5 @@
 import { Button, Card, Layout, Row } from "antd";
-import React, { FC } from "react";
+import React from "react";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 
 export interface BasketCardProps {

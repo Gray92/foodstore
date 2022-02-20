@@ -13,17 +13,53 @@
 .content{
 	padding: 0 50px;
 	min-height: calc(100vh - 134px);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 .site-card-wrapper{
 	min-height: calc(100vh - 310px);
+	max-width: 1200px;
 	padding: 24px;
-	border: 1px solid red;
+	
+}
+
+.basket-card-wrapper{
+	min-height: calc(100vh - 134px);
+	max-width: 1200px;
+	padding: 24px;
 }
 
 .card{
 	width: 200px;
+	height: 400px;
+	margin: 15px 0;
 }
+
+.card__title{
+	font-size: 14px;
+	font-weight: 700;
+}
+
+.card__desq{
+	font-size: 12px;
+	height: 112px;
+	
+}
+
+.card__bottom{
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.card__bottom__price{
+	font-size: 14px;
+	font-weight: 700;
+}
+
 
 .pagination{
 	margin: 15px;
@@ -38,7 +74,7 @@
 
 .basket_card{
 	font-size: 26px;
-	width: 1200px;
+	width: 1000px;
 }
 
 .basket_card__block{

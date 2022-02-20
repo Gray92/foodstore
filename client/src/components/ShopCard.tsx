@@ -1,5 +1,4 @@
 import { Layout, Card, Col, Button } from 'antd';
-import Meta from 'antd/lib/card/Meta';
 import React from 'react';
 import { BasketAction } from '../actions';
 import { useTypedSelector } from '../hooks/useTypedSelector';
@@ -15,7 +14,7 @@ interface ShopCardProps {
 }
 
 const ShopCard = ({ foodId, name, desqription, price, img }: ShopCardProps) => {
-	
+
 
 	const { id } = useTypedSelector(state => state.auth.user)
 
@@ -27,28 +26,30 @@ const ShopCard = ({ foodId, name, desqription, price, img }: ShopCardProps) => {
 		<Layout>
 			<Col span={8}>
 				<Card
-					style={{ width: '300px' }}
 					className="card"
 					cover={
 						<img
 							alt="example"
-							src={img}
+							src={`http://localhost:8080/${img}`}
 						/>
 					}
-					actions={[
-						<div>{price}$</div>,
-						<Button
-							onClick={() => addFood()}
-							type="primary"
-						>
-							В корзину
-						</Button>,
-					]}
 				>
-					<Meta
-						title={name}
-						description={desqription}
-					/>
+					<div className='card__title'>{name}</div>
+					<div>
+						<div className='card__desq'>
+							{desqription}
+						</div>
+						<div className='card__bottom'>
+							<div className='card__bottom__price'>{price}$</div>
+							<Button
+								onClick={() => addFood()}
+								type="primary"
+							>
+								В корзину
+							</Button>
+						</div>
+					</div>
+
 				</Card>
 			</Col>
 		</Layout>
