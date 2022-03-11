@@ -1,9 +1,10 @@
-import { IFood } from "../../../models/IFood";
+import { IFoods } from "../../../models/IFood";
 
 export interface FoodState {
-	food: IFood[];
+	food: IFoods[];
 	error: string;
 	isLoading: boolean;
+	paginateCount: number;
 	page: number,
 	type: string
 }
@@ -11,6 +12,7 @@ export interface FoodState {
 export enum FoodActionsEnum {
 	SET_FOOD = "SET_FOOD",
 	SET_ERROR = "SET_ERROR",
+	SET_PAGINATE_COUNT = "SET_PAGINATE_COUNT",
 	SET_IS_LOADING = "SET_IS_LOADING",
 	SET_FOOD_PAGE = "SET_FOOD_PAGE",
 	SET_FOOD_TYPE = "SET_FOOD_TYPE"
@@ -18,7 +20,12 @@ export enum FoodActionsEnum {
 
 export interface SetFoodAction {
 	type: FoodActionsEnum.SET_FOOD;
-	payload: IFood[]
+	payload: IFoods[]
+}
+
+export interface SetPaginateCountAction {
+	type: FoodActionsEnum.SET_PAGINATE_COUNT;
+	payload: number
 }
 
 export interface SetErrorAction {
@@ -44,6 +51,7 @@ export interface SetFoodType {
 export type FoodAction =
 	SetErrorAction |
 	SetFoodAction |
+	SetPaginateCountAction |
 	SetIsLoadingAction |
 	SetFoodPage |
 	SetFoodType

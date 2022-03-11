@@ -45,8 +45,9 @@ router.get('/',
 
 			Food.paginate(type, { page, limit })
 			.then(food => {
-					res.json(food.docs)
+					res.json(food)
 				})
+			
 
 		} catch (e) {
 			console.log(e)

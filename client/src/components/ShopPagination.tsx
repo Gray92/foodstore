@@ -8,7 +8,7 @@ import { FoodActionCreators } from "../store/reducers/food/action-creators";
 const ShopPagination: FC = () => {
 	const dispatch = useDispatch()
 
-	const { page } = useTypedSelector(state => state.food)
+	const { page, paginateCount } = useTypedSelector(state => state.food)
 
 	const onChange = (page: number) => {
 		dispatch(FoodActionCreators.setPage(page))
@@ -16,7 +16,7 @@ const ShopPagination: FC = () => {
 
 	return (
 		<Row justify='center' align='middle' className="pagination">
-			<Pagination defaultCurrent={1} onChange={onChange} current={page} total={30} />
+			<Pagination defaultCurrent={1} onChange={onChange} current={page} total={paginateCount} />
 		</Row>
 	)
 }
