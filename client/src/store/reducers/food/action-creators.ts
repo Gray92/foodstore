@@ -22,7 +22,6 @@ export const FoodActionCreators = {
 			}
 		})
 		const {totalDocs, docs} = response.data
-		console.log(response.data)
 		dispatch(FoodActionCreators.setPaginateCount(totalDocs))
 		dispatch(FoodActionCreators.setFood(docs))
 		dispatch(FoodActionCreators.setIsLoading(false))

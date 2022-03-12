@@ -1,6 +1,7 @@
 import axios from "axios";
 import { AppDispatch } from "../..";
 import { IUser } from "../../../models/IUser";
+import { BasketActionCreators } from "../basket/action-creators";
 import {
 	AuthActionsEnum,
 	SetAuthAction,
@@ -58,6 +59,7 @@ export const AuthActionCreators = {
 				{ headers: { Authorization: `Bearer ${localStorage.token}` } }
 			)
 			dispatch(AuthActionCreators.setUser(response.data.user))
+			dispatch(BasketActionCreators.setBasketFood(response.data.user.basket))
 			dispatch(AuthActionCreators.setIsAuth(true))
 			localStorage.setItem('token', response.data.token)
 			dispatch(AuthActionCreators.setIsLoading(false));

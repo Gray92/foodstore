@@ -37,7 +37,7 @@ router.put('/',
 		try {
 			const { userId, id } = req.body
 			const food = await Food.findOne({ _id: id })
-			const user = await User.updateOne({ _id: userId },
+			const userInit = await User.updateOne({ _id: userId },
 				{
 					$pull:{
 						basket: food
@@ -45,7 +45,7 @@ router.put('/',
 				}
 			)
 
-			//await user.save()
+			const user = await User.findOne({ _id: userId })
 
 			res.send(user)
 

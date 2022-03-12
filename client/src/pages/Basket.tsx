@@ -5,6 +5,7 @@ import BasketCost from '../components/BasketCost';
 import BasketHeader from '../components/BasketHeader';
 import BasketList from '../components/BasketList';
 
+
 const Basket: FC = () => {
 
 	return (

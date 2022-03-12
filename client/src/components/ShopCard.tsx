@@ -1,7 +1,8 @@
 import { Layout, Card, Col, Button } from 'antd';
 import React from 'react';
-import { BasketAction } from '../actions';
+import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../hooks/useTypedSelector';
+import { BasketActionCreators } from '../store/reducers/basket/action-creators';
 
 
 interface ShopCardProps {
@@ -14,12 +15,12 @@ interface ShopCardProps {
 }
 
 const ShopCard = ({ foodId, name, desqription, price, img }: ShopCardProps) => {
-
+	const dispatch = useDispatch()
 
 	const { id } = useTypedSelector(state => state.auth.user)
 
 	const addFood = () => {
-		BasketAction.plusFood(id, foodId)
+		dispatch(BasketActionCreators.plusFood(id, foodId))
 	}
 
 	return (
